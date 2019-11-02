@@ -11,7 +11,7 @@
 1. jump into project directory  
 `$ cd pocoLibExamples`
 1. fetch dependencies using conan (and CLion which uses clang - assuming a conan clang profile exists in `~/.conan/profiles/clang`)  
-`$ conan install ./ -if=./cmake-build-debug -pr=clang`  
+`$ conan install ./ -if=./cmake-build-debug -pr=clang --build zlib --build OpenSSL --build Poco`  
 `$ conan install ./ -if <install_folder> -pr <profile>`
 1. compile  
 `$ cmake  -G "Unix Makefiles" ./`
