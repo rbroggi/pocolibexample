@@ -5,8 +5,11 @@
 #pragma once
 
 #include <string>
+#include <usecase/Format.h>
 
 namespace pocolib_ex {
+
+std::string fromFormatToFormat(usecase::Format source_format, usecase::Format target_format, const std::string& content);
 
 std::string toBase64(const std::string& input);
 
