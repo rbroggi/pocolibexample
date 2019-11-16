@@ -4,6 +4,7 @@
 
 #include "Sign.h"
 #include <HexAndBase64Utils.h>
+#include <Macros.h>
 
 using namespace std::string_literals;
 pocolib_ex::usecase::Sign::Sign(const std::string& aHashAlgo,
@@ -14,6 +15,7 @@ pocolib_ex::usecase::Sign::Sign(const std::string& aHashAlgo,
       out_format(format) {}
 
 std::string pocolib_ex::usecase::Sign::execute(const std::string &content) {
+  PROFILE_FUNCTION();
   digest_engine.update(content);
   std::string digestHex = Poco::DigestEngine::digestToHex(digest_engine.signature());
   if (out_format == Format::BIN) {

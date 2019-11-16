@@ -2,10 +2,11 @@
 // Created by rbroggi on 11/3/19.
 //
 
-#include <Poco/Crypto/RSAKey.h>
-#include <Poco/Crypto/CipherFactory.h>
-#include <Poco/Crypto/Cipher.h>
 #include "Encrypt.h"
+#include <Macros.h>
+#include <Poco/Crypto/Cipher.h>
+#include <Poco/Crypto/CipherFactory.h>
+#include <Poco/Crypto/RSAKey.h>
 
 namespace pocolib_ex {
 namespace usecase {
@@ -15,6 +16,7 @@ using namespace std::string_literals;
 Encrypt::Encrypt(const std::string &pub_key_file_path, Format out_format) : pub_key_file_path_(pub_key_file_path), out_format(out_format) {}
 
 std::string Encrypt::execute(const std::string &content) {
+  PROFILE_FUNCTION();
   Poco::Crypto::Cipher* cypher_ptr = Poco::Crypto::CipherFactory::defaultFactory()
       .createCipher(Poco::Crypto::RSAKey(pub_key_file_path_), RSAPaddingMode::RSA_PADDING_PKCS1);
   if (cypher_ptr != nullptr) {

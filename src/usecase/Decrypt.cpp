@@ -3,6 +3,7 @@
 //
 
 #include "Decrypt.h"
+#include <Macros.h>
 #include <Poco/Crypto/Cipher.h>
 #include <Poco/Crypto/CipherFactory.h>
 #include <Poco/Crypto/RSAKey.h>
@@ -16,6 +17,7 @@ pocolib_ex::usecase::Decrypt::Decrypt(const std::string &private_key_file_path,
       out_format(out_format) {}
 
 std::string pocolib_ex::usecase::Decrypt::execute(const std::string &content) {
+  PROFILE_FUNCTION();
   Poco::Crypto::Cipher* cypher_ptr = Poco::Crypto::CipherFactory::defaultFactory()
       .createCipher(Poco::Crypto::RSAKey("", private_key_file_path, pwd), RSAPaddingMode::RSA_PADDING_PKCS1);
   if (cypher_ptr != nullptr) {

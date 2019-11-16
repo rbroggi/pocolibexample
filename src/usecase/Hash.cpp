@@ -2,10 +2,12 @@
 // Created by rbroggi on 11/3/19.
 //
 
-#include <HexAndBase64Utils.h>
 #include "Hash.h"
+#include <HexAndBase64Utils.h>
+#include <Macros.h>
 
 std::string pocolib_ex::usecase::Hash::execute(const std::string &content) {
+  PROFILE_FUNCTION();
   digest_engine.update(content);
   return fromFormatToFormat(Format::HEX, format, Poco::DigestEngine::digestToHex(digest_engine.digest()));
 }

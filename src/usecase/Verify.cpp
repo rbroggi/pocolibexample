@@ -4,6 +4,7 @@
 
 #include "Verify.h"
 #include <HexAndBase64Utils.h>
+#include <Macros.h>
 #include <iostream>
 pocolib_ex::usecase::Verify::Verify(
     const std::string& aHashAlgo,
@@ -13,7 +14,7 @@ pocolib_ex::usecase::Verify::Verify(
 }
 
 std::string pocolib_ex::usecase::Verify::execute(const std::string &content) {
-
+  PROFILE_FUNCTION();
   // convert signature to digest format (input->hex->digest)
   Poco::DigestEngine::Digest aSignatureDigest;
   if (in_format == Format::BIN) {
