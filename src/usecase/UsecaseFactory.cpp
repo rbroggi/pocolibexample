@@ -5,9 +5,12 @@
 #include <iostream>
 #include <algorithm>
 #include "UsecaseFactory.h"
-#include "Hash.h"
+#include "Decrypt.h"
 #include "Encrypt.h"
+#include "Hash.h"
+#include <algorithm>
 #include <fstream>
+#include <iostream>
 
 namespace pocolib_ex {
 namespace usecase {
@@ -20,16 +23,24 @@ std::tuple<bool, std::unique_ptr<UseCase>, std::string> UsecaseFactory::retrieve
   if (argc > 2) {
     auto u_case_it = std::find(possibleCases.cbegin(), possibleCases.cend(), std::string{argv[1]});
     if (u_case_it != possibleCases.end()) {
-      if ((*u_case_it) == "hash"s && argc == 5 && isValidHash(argv[2]) && retrieveFormat(argv[3]) != Format::NONE) {
-        return {true,
-                std::make_unique<Hash>(argv[2], retrieveFormat(argv[3])),
+      if ((*u_case_it) == "hash"s && argc == 5 && isValidHash(argv[2]) &&
+          retrieveFormat(argv[3]) != Format::NONE) {
+        return {true, std::make_unique<Hash>(argv[2], retrieveFormat(argv[3])),
                 std::string{argv[4]}};
       }
 
-      if ((*u_case_it) == "enc"s && argc == 5 && fileExist(argv[2]) && retrieveFormat(argv[3]) != Format::NONE) {
+      if ((*u_case_it) == "enc"s && argc == 5 && fileExist(argv[2]) &&
+          retrieveFormat(argv[3]) != Format::NONE) {
         return {true,
                 std::make_unique<Encrypt>(argv[2], retrieveFormat(argv[3])),
                 std::string{argv[4]}};
+      }
+
+      if ((*u_case_it) == "dec"s && argc == 6 && fileExist(argv[2]) &&
+          retrieveFormat(argv[4]) != Format::NONE) {
+        return {true,
+                std::make_unique<Decrypt>(argv[2], argv[3],retrieveFormat(argv[4])),
+                std::string {argv[5]}};
       }
     }
   }
