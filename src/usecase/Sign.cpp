@@ -21,7 +21,7 @@ std::string pocolib_ex::usecase::Sign::execute(const std::string &content) {
   } else if (out_format == Format::HEX) {
     return digestHex;
   } else if (out_format == Format::BASE_64) {
-    return pocolib_ex::toBase64(digestHex);
+    return pocolib_ex::fromFormatToFormat(usecase::Format::HEX, usecase::Format::BASE_64, digestHex);
   }
   return "Error!"s;
 }

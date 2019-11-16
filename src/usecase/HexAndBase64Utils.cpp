@@ -37,7 +37,10 @@ std::string toBase64(const std::string &input) {
             std::istreambuf_iterator<char>(),
             std::ostreambuf_iterator<char>(b64out));
   b64out.close();
-  return out.str();
+  auto toReturn = out.str();
+  toReturn.erase(std::remove(toReturn.begin(), toReturn.end(), '\n'), toReturn.end());
+  toReturn.erase(std::remove(toReturn.begin(), toReturn.end(), '\r'), toReturn.end());
+  return toReturn;
 }
 
 std::string fromBase64(const std::string &input) {
@@ -54,20 +57,23 @@ std::string fromBase64(const std::string &input) {
 std::string toHex(const std::string &input) {
   std::istringstream in(input);
   std::ostringstream out;
-  Poco::HexBinaryEncoder b64out(out);
+  Poco::HexBinaryEncoder hex_out(out);
   std::copy(std::istreambuf_iterator<char>(in),
             std::istreambuf_iterator<char>(),
-            std::ostreambuf_iterator<char>(b64out));
-  b64out.close();
-  return out.str();
+            std::ostreambuf_iterator<char>(hex_out));
+  hex_out.close();
+  auto toReturn = out.str();
+  toReturn.erase(std::remove(toReturn.begin(), toReturn.end(), '\n'), toReturn.end());
+  toReturn.erase(std::remove(toReturn.begin(), toReturn.end(), '\r'), toReturn.end());
+  return toReturn;
 }
 
 std::string fromHex(const std::string &input) {
   std::istringstream in(input);
   std::ostringstream out;
-  Poco::HexBinaryDecoder b64in(in);
+  Poco::HexBinaryDecoder hex_in(in);
 
-  std::copy(std::istreambuf_iterator<char>(b64in),
+  std::copy(std::istreambuf_iterator<char>(hex_in),
             std::istreambuf_iterator<char>(),
             std::ostreambuf_iterator<char>(out));
   return out.str();

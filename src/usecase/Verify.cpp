@@ -26,7 +26,6 @@ std::string pocolib_ex::usecase::Verify::execute(const std::string &content) {
         Poco::DigestEngine::digestFromHex(pocolib_ex::fromFormatToFormat(
             usecase::Format::BASE_64, usecase::Format::HEX, signature));
   }
-
   digest_engine.update(content);
   if (digest_engine.verify(aSignatureDigest)) {
     return "Verified";
