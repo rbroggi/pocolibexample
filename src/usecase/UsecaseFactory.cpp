@@ -2,12 +2,11 @@
 // Created by rbroggi on 11/3/19.
 //
 
-#include <iostream>
-#include <algorithm>
 #include "UsecaseFactory.h"
 #include "Decrypt.h"
 #include "Encrypt.h"
 #include "Hash.h"
+#include "Sign.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -41,6 +40,13 @@ std::tuple<bool, std::unique_ptr<UseCase>, std::string> UsecaseFactory::retrieve
         return {true,
                 std::make_unique<Decrypt>(argv[2], argv[3],retrieveFormat(argv[4])),
                 std::string {argv[5]}};
+      }
+
+      if ((*u_case_it) == "sign"s && argc == 7 && fileExist(argv[3]) &&
+          retrieveFormat(argv[5]) != Format::NONE) {
+        return {true,
+                std::make_unique<Sign>(argv[2], argv[3], argv[4], retrieveFormat(argv[5])),
+                std::string {argv[6]}};
       }
     }
   }

@@ -19,8 +19,8 @@ class Hash : public UseCase {
   std::string execute(const std::string &content) override;
 
  private:
-  Poco::Crypto::DigestEngine digest_engine_;
-  Format format_;
+  Poco::Crypto::DigestEngine digest_engine;
+  Format format;
 
 };
 }

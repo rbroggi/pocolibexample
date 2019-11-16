@@ -27,5 +27,5 @@ std::string pocolib_ex::usecase::Decrypt::execute(const std::string &content) {
       return cypher_ptr->decryptString(content, Poco::Crypto::Cipher::ENC_BASE64);
     }
   }
-  return ""s;
+  return "Error!"s;
 }
