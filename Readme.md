@@ -15,3 +15,12 @@
 1. compile  
     i. `$ cmake -G "Unix Makefiles" ./ -B./build`  
     ii. `$ cd build && make`
+1. Run binary with options:
+```bash
+poco_lib enc <publicKeyPath> <bin/hex/b64> <content>
+poco_lib dec <privKeyPath> <pwd> <bin/hex/b64> <content>
+poco_lib sign <MD5/SHA1/SHA256/SHA512> <private_key_file> <pwd> <bin/hex/b64> <content>
+poco_lib verify <MD5/SHA1/SHA256/SHA512> <public_key_file_path> <signature> <signFormat:bin/hex/b64> <content>
+poco_lib hash <MD5/SHA1/SHA256/SHA512> <bin/hex/b64> <content>
+```
+```
