@@ -7,6 +7,7 @@
 #include "Encrypt.h"
 #include "Hash.h"
 #include "Sign.h"
+#include "Verify.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -46,6 +47,13 @@ std::tuple<bool, std::unique_ptr<UseCase>, std::string> UsecaseFactory::retrieve
           retrieveFormat(argv[5]) != Format::NONE) {
         return {true,
                 std::make_unique<Sign>(argv[2], argv[3], argv[4], retrieveFormat(argv[5])),
+                std::string {argv[6]}};
+      }
+
+      if ((*u_case_it) == "verify"s && argc == 7 && fileExist(argv[3]) &&
+          retrieveFormat(argv[5]) != Format::NONE) {
+        return {true,
+                std::make_unique<Verify>(argv[2], argv[3], argv[4], retrieveFormat(argv[5])),
                 std::string {argv[6]}};
       }
     }
