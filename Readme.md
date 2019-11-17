@@ -29,3 +29,9 @@ poco_lib hash <MD5/SHA1/SHA256/SHA512> <bin/hex/b64> <content>
 
 ### Profile execution
 The code has an embedded profiler, thanks to [Yan Chernikov](https://github.com/TheCherno) for the profiler [video](https://www.youtube.com/watch?v=xlAH4dbMVnU). To use the profiler, whenever executed in debug mode a file `results.json` will be dumped in the directory of execution. using [chrome](https://www.google.com/chrome/?brand=CHBD&gclid=Cj0KCQiA2b7uBRDsARIsAEE9XpH-d98Bck55bnsLjWP3gl1tF0JF8xjRX8VSXEds4GkZ4B2uyj3g_x0aAmzFEALw_wcB&gclsrc=aw.ds) browser you can navigate to its embedded tracer on the following [address](chrome://tracing/) and load the json file to have a visual representation for the tracer.
+
+### Dockerfile build and simple tests
+
+```bash
+$ docker build . -t pocolibexamples
+```
